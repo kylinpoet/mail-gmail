@@ -1,0 +1,10 @@
+[project]
+name = "mail-gmail"
+version = "0.1.0"
+description = "SQLite + FastAPI Gmail multi-account manager using Google OAuth."
+requires-python = ">=3.13,<3.14"
+
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+pythonpath = ["backend"]
+
