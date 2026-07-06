@@ -41,6 +41,31 @@ npm run dev
 
 Open `http://127.0.0.1:5173`.
 
+## Docker
+
+Build and run the backend and frontend with Docker Compose:
+
+```powershell
+$env:MASTER_KEY = "change-this-to-a-long-random-secret"
+docker compose up --build
+```
+
+Open:
+
+- Frontend: `http://127.0.0.1:5173`
+- Backend API: `http://127.0.0.1:8000`
+- Swagger UI: `http://127.0.0.1:8000/docs`
+
+Useful environment variables:
+
+- `MASTER_KEY`: required for encrypting app passwords; keep it stable after accounts are added
+- `ADMIN_TOKEN`: optional admin API token sent as `X-Admin-Token`
+- `BACKEND_PORT`: host port for the backend, default `8000`
+- `FRONTEND_PORT`: host port for the frontend, default `5173`
+- `VITE_API_BASE`: frontend build-time API base URL, default `http://127.0.0.1:8000`
+
+SQLite data is persisted in `backend/data/app.db` through a bind mount.
+
 ## Gmail App Password Setup
 
 Enable 2-Step Verification on each Gmail account, then create an App Password in Google Account security settings. Add the Gmail address and app password in the admin UI. The backend connects to:
