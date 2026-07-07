@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import "./styles.css";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "http://127.0.0.1:8000";
+const API_BASE = import.meta.env.VITE_API_BASE || (import.meta.env.DEV ? "http://127.0.0.1:8000" : "");
 const SYNC_ALL_ACCOUNTS = "__all_accounts__";
 const SYNC_FIRST_ACCOUNT = "__first_account__";
 

@@ -41,6 +41,35 @@ npm run dev
 
 Open `http://127.0.0.1:5173`.
 
+## Docker
+
+The Docker image includes both the FastAPI backend and the React admin UI:
+
+```powershell
+$env:MASTER_KEY = "change-this-to-a-long-random-secret"
+docker compose up --build
+```
+
+Open `http://127.0.0.1:8000`.
+
+To build a distributable image directly:
+
+```powershell
+docker build -t mail-gmail:latest .
+```
+
+Run the image directly with SQLite data mapped to the host:
+
+```powershell
+docker run --rm -p 8000:8000 `
+  -e MASTER_KEY="change-this-to-a-long-random-secret" `
+  -e DATABASE_URL="sqlite:////app/backend/data/app.db" `
+  -v "${PWD}/backend/data:/app/backend/data" `
+  mail-gmail:latest
+```
+
+SQLite is stored on the host in `backend/data/app.db`. The full `backend/data` directory is mounted so SQLite WAL files such as `app.db-wal` and `app.db-shm` are persisted with the database.
+
 ## Gmail App Password Setup
 
 Enable 2-Step Verification on each Gmail account, then create an App Password in Google Account security settings. Add the Gmail address and app password in the admin UI. The backend connects to:

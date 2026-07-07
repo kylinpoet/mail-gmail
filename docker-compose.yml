@@ -1,0 +1,16 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: sqlite:////app/backend/data/app.db
+      MASTER_KEY: ${MASTER_KEY:-change-me-to-a-long-random-secret}
+      ADMIN_TOKEN: ${ADMIN_TOKEN:-}
+      FRONTEND_ORIGIN: ${FRONTEND_ORIGIN:-http://127.0.0.1:8000}
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    volumes:
+      # Persist app.db plus SQLite WAL/SHM files on the host.
+      - ./backend/data:/app/backend/data
+    restart: unless-stopped
